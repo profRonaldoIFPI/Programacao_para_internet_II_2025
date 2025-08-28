@@ -416,7 +416,7 @@ Os diagramas ajudam a:
 - **Planejar** futuras implementações
 - **Documentar** decisões arquiteturais
 
-## 👨‍🏫 Autor
+## 👨🏽‍🏫 Autor
 
 **Professor**: Ronaldo Borges  
 **Disciplina**: Programação para Internet II  
