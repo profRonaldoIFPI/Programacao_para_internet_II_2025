@@ -1,0 +1,16 @@
+{
+  "name": "aula-3",
+  "version": "1.0.0",
+  "description": "Exemplos de uso de rotas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "author": "Ronaldo Borges",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
