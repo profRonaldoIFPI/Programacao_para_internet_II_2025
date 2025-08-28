@@ -1,0 +1,113 @@
+@startuml Arquitetura das Aulas - Programação para Internet II
+
+!theme plain
+title Evolução Arquitetural - Programação para Internet II (TADS 2025.2)
+
+' Definição de cores
+!define AULA1_COLOR #FFE6E6
+!define AULA2_COLOR #E6F3FF
+!define AULA3_COLOR #E6FFE6
+!define AULA4_COLOR #FFF0E6
+
+package "Aula 1: HTTP Nativo" as aula1 AULA1_COLOR {
+  [Módulo HTTP] as http
+  [createServer()] as server1
+  [Requisição] as req1
+  [Resposta] as res1
+  
+  http --> server1
+  server1 --> req1
+  server1 --> res1
+  
+  note right of server1
+    • Servidor HTTP básico
+    • Manipulação manual de headers
+    • Callback (req, res)
+    • listen() na porta 8080
+  end note
+}
+
+package "Aula 2: Express Básico" as aula2 AULA2_COLOR {
+  [Express Framework] as express
+  [app.get()] as routes2
+  [Middleware] as middleware2
+  [res.send()] as send
+  
+  express --> routes2
+  express --> middleware2
+  routes2 --> send
+  
+  note right of routes2
+    • Roteamento simplificado
+    • Múltiplas rotas
+    • Métodos HTTP (GET, POST, etc.)
+    • Sintaxe mais limpa
+  end note
+}
+
+package "Aula 3: Parâmetros Dinâmicos" as aula3 AULA3_COLOR {
+  [Route Parameters] as params
+  [Query Strings] as query
+  [req.params] as reqparams
+  [req.query] as reqquery
+  [Validação] as validation
+  
+  params --> reqparams
+  query --> reqquery
+  reqparams --> validation
+  reqquery --> validation
+  
+  note right of params
+    • URLs dinâmicas (:parametro)
+    • Query strings (?campo=valor)
+    • Captura de dados da URL
+    • Roteamento condicional
+  end note
+}
+
+package "Aula 4: MVC e Templates" as aula4 AULA4_COLOR {
+  [Express Router] as router
+  [EJS Template] as ejs
+  [res.render()] as render
+  [Views Folder] as views
+  [Controller Module] as controller
+  
+  router --> controller
+  ejs --> views
+  render --> ejs
+  controller --> render
+  
+  note right of router
+    • Modularização de rotas
+    • Templates dinâmicos
+    • Separação MVC
+    • Reutilização de código
+  end note
+}
+
+' Fluxo de evolução
+aula1 -down-> aula2 : "Simplificação\ncom Framework"
+aula2 -down-> aula3 : "Adição de\nDados Dinâmicos"
+aula3 -down-> aula4 : "Organização\ne Templates"
+
+' Cliente e Servidor
+actor Cliente as client
+cloud "Servidor Node.js" as server {
+  aula1
+  aula2
+  aula3
+  aula4
+}
+
+client <--> server : "HTTP Request/Response"
+
+' Legenda
+legend right
+  |Cor| Aula | Conceito Principal |
+  |AULA1_COLOR| Aula 1 | HTTP Nativo |
+  |AULA2_COLOR| Aula 2 | Express Framework |
+  |AULA3_COLOR| Aula 3 | Parâmetros Dinâmicos |
+  |AULA4_COLOR| Aula 4 | MVC e Templates |
+endlegend
+
+@enduml

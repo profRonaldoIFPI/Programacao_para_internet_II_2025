@@ -14,7 +14,6 @@ app.get("/:texto", (req, res)=>{
     )
 })
 
-
 app.use("/user", controller)
 app.use("/products", controller)
 

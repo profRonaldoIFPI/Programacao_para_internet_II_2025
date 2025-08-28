@@ -1,0 +1,89 @@
+@startuml Arquitetura MVC - Aula 4
+
+!theme plain
+title Arquitetura MVC com Express Router e EJS - Aula 4
+
+' Definição de cores
+!define MODEL_COLOR #E6F3FF
+!define VIEW_COLOR #E6FFE6
+!define CONTROLLER_COLOR #FFF0E6
+!define CLIENT_COLOR #FFE6E6
+
+' Cliente
+actor "Cliente\n(Navegador)" as client CLIENT_COLOR
+
+' Servidor Express
+package "Servidor Express" as server {
+  
+  ' Controller Layer
+  package "Controller (Lógica)" as controller_layer CONTROLLER_COLOR {
+    [index.js\n(App Principal)] as main_app
+    [controller.js\n(Router Modular)] as router_module
+    [Express Router] as express_router
+    
+    main_app --> express_router
+    express_router --> router_module
+  }
+  
+  ' View Layer
+  package "View (Apresentação)" as view_layer VIEW_COLOR {
+    folder "views/" as views_folder {
+      [pagina.ejs\n(Template)] as template
+      [partials/\n(Componentes)] as partials
+    }
+    [EJS Engine] as ejs_engine
+    
+    ejs_engine --> template
+    ejs_engine --> partials
+  }
+  
+  ' Model Layer (Conceitual)
+  package "Model (Dados)" as model_layer MODEL_COLOR {
+    [Dados da Aplicação\n(req.params, req.query)] as app_data
+    [Objetos JavaScript\n(Passados para Templates)] as js_objects
+    
+    app_data --> js_objects
+  }
+}
+
+' Fluxo de dados
+client --> main_app : "1. HTTP Request\n/user/rota2"
+main_app --> router_module : "2. Route Matching\napp.use('/user', controller)"
+router_module --> app_data : "3. Extract Data\nreq.params, req.query"
+app_data --> js_objects : "4. Process Data"
+js_objects --> ejs_engine : "5. res.render()\n+ data object"
+ejs_engine --> template : "6. Template Processing\n<%= variavel %>"
+template --> client : "7. HTML Response"
+
+' Rotas específicas
+note right of main_app
+  **Rotas Principais:**
+  • GET /:texto → res.render()
+  • app.use('/user', controller)
+  • app.use('/products', controller)
+end note
+
+note right of router_module
+  **Router Modular:**
+  • GET / → "Controller response"
+  • GET /rota2 → "Rota 2"
+  • Reutilizável em múltiplos paths
+end note
+
+note right of template
+  **Template EJS:**
+  • <%= texto %> → Renderiza variável
+  • <% if() %> → Lógica condicional
+  • <%- include() %> → Inclui partials
+end note
+
+' Exemplos de URLs
+note left of client
+  **URLs de Exemplo:**
+  • /MeuTitulo → Template EJS
+  • /user/ → Router response
+  • /user/rota2 → Router response
+  • /products/ → Mesmo router
+end note
+
+@enduml

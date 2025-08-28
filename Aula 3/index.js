@@ -2,8 +2,8 @@ const express = require("express")
 const app = express()
 //req = requisição do navegador
 //res = resposta do servidor
-// /?campo=valor
-app.get("/",(req,res)=>{  // parametro opcional via query
+
+app.get("/",(req,res)=>{  // parametro opcional via query URL:/?campo=valor
     var busca = req.query["campo"]
     console.log("rota raiz requisitada")
     var saida = "Query: "+busca 
@@ -15,14 +15,9 @@ app.get("/IFPI/:conteudo", (req, res)=>{ //parametro obrigatorio
     var saida = "Parametro: " + conteudo;
     res.send(saida)
 });
-// app.get("/IFPI/:conteudo?", (req, res)=>{ //parametro opcional
-//     var conteudo = req.params.conteudo
-//     var saida = "Parametro: " + conteudo;
-//     res.send(saida)
-// });
 
 // Quando não vem parâmetro
-app.get('/busca', (req, res) => {
+app.get('/IFPI', (req, res) => {
     res.send("Você não passou nenhum termo de busca");
 });
 

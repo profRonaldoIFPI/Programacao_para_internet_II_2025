@@ -1,0 +1,142 @@
+@startuml Fluxo de Parâmetros - Aula 3
+
+!theme plain
+title Parâmetros de Rota e Query Strings - Aula 3
+
+' Definição de cores
+!define URL_COLOR #E6F3FF
+!define PARAMS_COLOR #E6FFE6
+!define QUERY_COLOR #FFF0E6
+!define RESPONSE_COLOR #FFE6E6
+
+actor "Cliente" as client
+
+' URLs de exemplo
+package "URLs de Exemplo" as urls URL_COLOR {
+  [http://localhost:8080/?campo=express] as url1
+  [http://localhost:8080/IFPI/programacao] as url2
+  [http://localhost:8080/IFPI/Floriano] as url3
+  [http://localhost:8080/IFPI] as url4
+}
+
+' Servidor Express
+package "Servidor Express" as server {
+  
+  ' Rota com Query String
+  package "Query String Route" as query_route QUERY_COLOR {
+    [app.get('/', handler)] as route1
+    [req.query['campo']] as query_extract
+    ["Query: " + busca] as query_response
+    
+    route1 --> query_extract
+    query_extract --> query_response
+  }
+  
+  ' Rota com Parâmetros
+  package "Parameter Route" as param_route PARAMS_COLOR {
+    [app.get('/IFPI/:conteudo', handler)] as route2
+    [req.params.conteudo] as param_extract
+    ["Parametro: " + conteudo] as param_response
+    
+    route2 --> param_extract
+    param_extract --> param_response
+  }
+  
+  ' Rota Específica
+  package "Specific Route" as specific_route PARAMS_COLOR {
+    [app.get('/IFPI/Floriano', handler)] as route3
+    ["IFPI Campus Floriano"] as specific_response
+    
+    route3 --> specific_response
+  }
+  
+  ' Rota Base
+  package "Base Route" as base_route PARAMS_COLOR {
+    [app.get('/IFPI', handler)] as route4
+    ["Você não passou termo"] as base_response
+    
+    route4 --> base_response
+  }
+}
+
+' Fluxos de dados
+client --> url1
+client --> url2
+client --> url3
+client --> url4
+
+url1 --> route1 : "?campo=express"
+url2 --> route2 : "/IFPI/programacao"
+url3 --> route3 : "/IFPI/Floriano"
+url4 --> route4 : "/IFPI"
+
+query_response --> client : "Query: express"
+param_response --> client : "Parametro: programacao"
+specific_response --> client : "IFPI Campus Floriano"
+base_response --> client : "Você não passou termo"
+
+' Análise da URL
+package "Anatomia da URL" as url_anatomy {
+  note as url_parts
+    **http://localhost:8080/IFPI/programacao?nivel=avancado**
+    
+    • **Protocol**: http://
+    • **Host**: localhost
+    • **Port**: 8080
+    • **Base Path**: /IFPI
+    • **Parameter**: programacao (req.params.conteudo)
+    • **Query String**: ?nivel=avancado (req.query.nivel)
+  end note
+}
+
+' Ordem de Precedência
+note right of server
+  **Ordem Importante das Rotas:**
+  
+  1. app.get('/IFPI/Floriano') ← Específica
+  2. app.get('/IFPI/:conteudo') ← Genérica
+  3. app.get('/IFPI') ← Base
+  
+  ⚠️ Rotas específicas devem vir
+  ANTES das genéricas!
+end note
+
+' Objetos de Dados
+package "Objetos de Dados" as data_objects {
+  note as req_objects
+    **req.params** (Parâmetros de Rota)
+    • Obrigatórios
+    • Parte da URL
+    • /usuario/:id → req.params.id
+    
+    **req.query** (Query Strings)
+    • Opcionais
+    • Após o ?
+    • ?nome=João&idade=25
+    • req.query.nome, req.query.idade
+  end note
+}
+
+' Exemplos de Validação
+package "Validação e Tratamento" as validation {
+  note as validation_examples
+    **Validação de Parâmetros:**
+    
+    ```javascript
+    const id = req.params.id;
+    if (isNaN(id)) {
+      return res.status(400)
+        .send('ID deve ser número');
+    }
+    ```
+    
+    **Valores Padrão para Query:**
+    
+    ```javascript
+    const pagina = req.query.pagina || 1;
+    const limite = req.query.limite || 10;
+    ```
+  end note
+}
+
+@enduml

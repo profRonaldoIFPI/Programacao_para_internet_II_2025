@@ -7,7 +7,6 @@ app.get('/rota2', (req, res) => {
     res.send("Rota 2!");
 });
 
-
 app.listen(8080,(erro)=>{
     if (erro) {
         console.log("Erro ao iniciar o servidor:", erro);
