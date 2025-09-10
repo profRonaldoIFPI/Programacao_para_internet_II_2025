@@ -17,110 +17,65 @@ Cada pasta representa uma aula com conceitos específicos, construindo conhecime
 
 ## 📁 Estrutura do Repositório
 
-````
-
-<File before editing>
-```markdown
-# Programação para Internet II — Exemplos Práticos (TADS 2025.2)
-
-## 📚 Sobre o Repositório
-
-Este repositório contém exemplos práticos e progressivos da disciplina **Programação para Internet II** do curso de Tecnologia em Análise e Desenvolvimento de Sistemas (TADS 2025.2).
-
-Cada pasta representa uma aula com conceitos específicos, construindo conhecimento de forma incremental desde servidores HTTP básicos até aplicações web completas com Express.js e templates EJS.
-
-## 🎯 Objetivos de Aprendizagem
-
-- Compreender os fundamentos de servidores HTTP em Node.js
-- Dominar o framework Express.js para desenvolvimento web
-- Implementar roteamento dinâmico e manipulação de parâmetros
-- Utilizar templates EJS para renderização de páginas dinâmicas
-- Organizar código com padrão MVC (Model-View-Controller)
-
-## 📁 Estrutura do Repositório
-
-````
-
+```
 Programacao_para_internet_II_2025/
-├── Aula 1/ # Servidor HTTP Nativo
+├── 📂 Aula 1 — Servidor HTTP Nativo
 │ ├── index.js # Servidor HTTP básico
-│ ├── teste.js # Exemplo Hello World
+│ ├── teste.js # Exemplo "Hello World"
 │ ├── package.json # Configurações do projeto
 │ └── README.md # Documentação detalhada
-├── Aula 2/ # Introdução ao Express
+├── 📂 Aula 2 — Introdução ao Express
 │ ├── index.js # Aplicação Express básica
 │ ├── package.json # Dependências (Express)
 │ └── README.md # Guia do Express
-├── Aula 3/ # Parâmetros e Query Strings
+├── 📂 Aula 3 — Parâmetros e Query Strings
 │ ├── index.js # Rotas dinâmicas
 │ ├── package.json # Configurações Express
 │ ├── parametros-diagram.puml # Diagrama de fluxo de dados
 │ └── README.md # Guia de parâmetros
-├── Aula 4/ # Routers e Templates EJS
+├── 📂 Aula 4 — Routers e Templates EJS
 │ ├── index.js # Aplicação principal
 │ ├── controller.js # Router modular
 │ ├── views/
 │ │ └── pagina.ejs # Template HTML dinâmico
 │ ├── package.json # Dependências (Express + EJS)
-│ ├── mvc-diagram.puml # Diagrama arquitetura MVC
+│ ├── mvc-diagram.puml # Diagrama da arquitetura MVC
 │ └── README.md # Guia MVC e Templates
-├── arquitetura.puml # Diagrama geral da evolução
-└── README.md # Este arquivo (documentação principal)
-
-````
-
-## 📊 Diagramas Arquiteturais
-
-Este repositório inclui diagramas PlantUML para visualizar a arquitetura e evolução dos conceitos:
-
-- **[arquitetura.puml](arquitetura.puml)** - Visão geral da evolução arquitetural das 4 aulas
-- **[Aula 3/parametros-diagram.puml](Aula 3/parametros-diagram.puml)** - Fluxo de parâmetros e query strings
-- **[Aula 4/mvc-diagram.puml](Aula 4/mvc-diagram.puml)** - Arquitetura MVC com Express Router e EJS
-
-> **Dica**: Use extensões como "PlantUML" no VS Code para visualizar os diagramas diretamente no editor.
-
----
+├── 📂 Aula 5 — Projeto para exercitar
+│ ├── 📂 ToDoList
+│ │ ├── app.js # Aplicação Express com EJS
+│ │ ├── views/
+│ │ │ └── index.ejs # Template da lista de tarefas
+│ │ ├── package.json # Dependências (Express + EJS)
+│ │ ├── todolist-diagram.puml # Diagrama da arquitetura
+│ │ └── README.md # Documentação do projeto
+├── 📄 arquitetura.puml # Diagrama geral da evolução
+└── 📄 README.md # Documentação principal
+```
 
 ## 🚀 Aula 1: Servidor HTTP Básico com Node.js
 
 ### 📖 Conceitos Abordados
+
 - Módulo `http` nativo do Node.js
 - Criação de servidor HTTP básico
 - Manipulação de requisições e respostas
 - Configuração de headers HTTP
 
 ### 📂 Arquivos
+
 - **`index.js`** - Servidor HTTP básico que responde na porta 8080
 - **`teste.js`** - Exemplo simples de "Hello World" em Node.js
 - **`package.json`** - Configurações do projeto
 - **`.gitignore`** - Arquivos ignorados pelo Git
 
 ### 💡 Exemplo Prático
-```javascript
-// Servidor HTTP básico que responde com texto simples
-const http = require('http');
 
-const servidor = http.createServer((requisicao, resposta) => {
-    resposta.writeHead(200, {'Content-Type': 'text/plain'});
-    resposta.end('Isso é uma resposta do servidor HTTP');
-});
-
-servidor.listen(8080, (erro) => {
-    if(erro) {
-        return console.log('Erro ao iniciar o servidor:', erro);
-    } else {
-        console.log('Servidor rodando na porta 8080');
-    }
-});
-````
+O exemplo prático demonstra a criação de um servidor HTTP básico utilizando o módulo nativo do Node.js, que responde com texto simples na porta 8080.
 
 ### 🔧 Como Executar
 
-```bash
-cd "Aula 1"
-node index.js
-# Acesse: http://localhost:8080
-```
+Para executar, navegue até a pasta "Aula 1" e inicie o servidor com o comando `node index.js`. Depois acesse http://localhost:8080 no navegador.
 
 ---
 
@@ -141,39 +96,11 @@ node index.js
 
 ### 💡 Exemplo Prático
 
-```javascript
-// Aplicação Express com múltiplas rotas
-const express = require("express");
-const app = express();
-
-// Rota 1: /teste
-app.get("/teste", (req, res) => {
-  res.send("Olá Express!");
-});
-
-// Rota 2: /rota2
-app.get("/rota2", (req, res) => {
-  res.send("Rota 2!");
-});
-
-// Inicialização do servidor
-app.listen(8080, (erro) => {
-  if (erro) {
-    console.log("Erro ao iniciar o servidor:", erro);
-  } else {
-    console.log("Servidor rodando na porta 8080");
-  }
-});
-```
+O exemplo demonstra uma aplicação Express com múltiplas rotas ("/teste" e "/rota2"), mostrando como configurar rotas básicas e inicializar um servidor na porta 8080.
 
 ### 🔧 Como Executar
 
-```bash
-cd "Aula 2"
-npm install
-node index.js
-# Acesse: http://localhost:8080/teste ou http://localhost:8080/rota2
-```
+Para executar, navegue até a pasta "Aula 2", instale as dependências com `npm install` e inicie o servidor com `node index.js`. Depois acesse http://localhost:8080/teste ou http://localhost:8080/rota2 no navegador.
 
 ---
 
@@ -194,46 +121,20 @@ node index.js
 
 ### 💡 Exemplo Prático
 
-```javascript
-const express = require("express");
-const app = express();
+O exemplo demonstra diferentes tipos de rotas em Express:
+- Rota raiz que captura query strings (ex: /?campo=valor)
+- Rota com parâmetro obrigatório (/IFPI/:conteudo)
+- Rota específica que deve vir antes da genérica (/IFPI/Floriano)
+- Rota sem parâmetro (/IFPI)
 
-// Rota com query string opcional
-app.get("/", (req, res) => {
-  var busca = req.query["campo"]; // ?campo=valor
-  var saida = "Query: " + busca;
-  res.send(saida);
-});
-
-// Rota com parâmetro obrigatório
-app.get("/IFPI/:conteudo", (req, res) => {
-  var conteudo = req.params.conteudo; // /IFPI/teste
-  var saida = "Parametro: " + conteudo;
-  res.send(saida);
-});
-
-// Rota específica (deve vir antes da genérica)
-app.get("/IFPI/Floriano", (req, res) => {
-  res.send("IFPI Campus Floriano");
-});
-
-// Rota sem parâmetro
-app.get("/IFPI", (req, res) => {
-  res.send("Você não passou nenhum termo de busca");
-});
-```
+O código mostra como acessar os valores de req.query e req.params para manipular dados da URL.
 
 ### 🔧 Como Executar
 
-```bash
-cd "Aula 3"
-npm install
-node index.js
-# Exemplos de acesso:
-# http://localhost:8080/?campo=teste
-# http://localhost:8080/IFPI/programacao
-# http://localhost:8080/IFPI/Floriano
-```
+Para executar, navegue até a pasta "Aula 3", instale as dependências com `npm install` e inicie o servidor com `node index.js`. Exemplos de acesso:
+- http://localhost:8080/?campo=teste
+- http://localhost:8080/IFPI/programacao
+- http://localhost:8080/IFPI/Floriano
 
 ---
 
@@ -258,77 +159,64 @@ node index.js
 ### 💡 Exemplo Prático
 
 **Aplicação Principal (index.js):**
-
-```javascript
-const express = require("express");
-const app = express();
-const controller = require("./controller");
-
-// Configuração do template engine
-app.set("view engine", "ejs");
-
-// Rota com renderização de template
-app.get("/:texto", (req, res) => {
-  var texto = req.params.texto;
-  res.render("pagina", {
-    // Renderiza views/pagina.ejs
-    texto: texto, // Passa dados para o template
-  });
-});
-
-// Uso de routers modulares
-app.use("/user", controller); // Rotas: /user/ e /user/rota2
-app.use("/products", controller); // Rotas: /products/ e /products/rota2
-```
+A aplicação principal configura o EJS como motor de template, cria uma rota dinâmica que captura um parâmetro da URL e o passa para o template, e utiliza routers modulares para organizar as rotas em `/user` e `/products`.
 
 **Controller Modular (controller.js):**
-
-```javascript
-const express = require("express");
-const router = express.Router();
-
-// Rota base do router
-router.get("/", (req, res) => {
-  res.send("Esta resposta vem do controller");
-});
-
-// Rota adicional do router
-router.get("/rota2", (req, res) => {
-  res.send("Rota 2");
-});
-
-module.exports = router;
-```
+Implementa um router Express com duas rotas: uma rota base que responde com texto simples e uma rota adicional `/rota2`. O router é exportado para ser usado na aplicação principal.
 
 **Template EJS (views/pagina.ejs):**
-
-```html
-<!DOCTYPE html>
-<html lang="pt_br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= texto %></title>
-    <!-- Dados dinâmicos -->
-  </head>
-  <body>
-    <h1><%= texto %></h1>
-    <!-- Renderização de variável -->
-  </body>
-</html>
-```
+Um template HTML básico que utiliza a sintaxe EJS para renderizar dinamicamente o valor da variável `texto` no título e no corpo da página.
 
 ### 🔧 Como Executar
 
-```bash
-cd "Aula 4"
-npm install
-node index.js
-# Exemplos de acesso:
-# http://localhost:8080/MeuTitulo (renderiza template)
-# http://localhost:8080/user/ (controller)
-# http://localhost:8080/products/rota2 (controller)
-```
+Para executar, navegue até a pasta "Aula 4", instale as dependências com `npm install` e inicie o servidor com `node index.js`. Exemplos de acesso:
+- http://localhost:8080/MeuTitulo (renderiza template)
+- http://localhost:8080/user/ (controller)
+- http://localhost:8080/products/rota2 (controller)
+
+---
+
+## 📝 Aula 5: Projeto Prático - ToDoList
+
+### 📖 Conceitos Abordados
+
+- Aplicação prática dos conceitos anteriores
+- Desenvolvimento de uma aplicação completa de lista de tarefas
+- Renderização de tabelas dinâmicas com EJS
+- Estruturação de projeto web funcional
+- Preparação para implementação de CRUD completo
+
+### 📂 Arquivos
+
+- **`app.js`** - Aplicação Express com configuração EJS e rota principal
+- **`views/index.ejs`** - Template HTML com tabela de tarefas
+- **`package.json`** - Dependências (Express + EJS) e scripts de execução
+- **`README.md`** - Documentação detalhada do projeto
+
+### 💡 Exemplo Prático
+
+**Aplicação Principal (app.js):**
+A aplicação configura o Express com o motor de template EJS e um decodificador para requisições POST. Define uma rota `/tasks` que renderiza o template `index.ejs` e inicia o servidor na porta 3000.
+
+**Template EJS (views/index.ejs):**
+Um template HTML que exibe uma lista de tarefas em formato de tabela, com colunas para a tarefa, status e ações. Inclui uma tarefa de exemplo "Estudar EJS" com status "pendente" e um link para adicionar novas tarefas.
+
+### 🔧 Como Executar
+
+Para executar, navegue até a pasta "Aula 5/ToDoList", instale as dependências com `npm install` e inicie o servidor com `npm run dev` (para desenvolvimento com nodemon) ou `npm start` (para execução normal). Depois acesse http://localhost:3000/tasks no navegador.
+
+### 🚀 Funcionalidades Implementadas
+
+- Visualização de tarefas em formato de tabela
+- Estrutura para marcação de tarefas como concluídas
+- Interface para adição de novas tarefas
+
+### 🔍 Próximos Passos
+
+- Implementar persistência de dados
+- Adicionar funcionalidade de exclusão de tarefas
+- Melhorar o design com CSS
+- Implementar filtros por status
 
 ---
 
@@ -342,33 +230,15 @@ node index.js
 
 ### Instalação Geral
 
-```bash
-# Clone o repositório
-git clone <url-do-repositorio>
-
-# Entre no diretório
-cd "Programacao_para_internet_II_2025"
-
-# Para cada aula, instale as dependências:
-cd "Aula X"
-npm install
-```
+Para instalar, clone o repositório, entre no diretório principal e, para cada aula, navegue até a pasta correspondente e instale as dependências com npm install.
 
 ## 📋 Comandos Úteis
 
-```bash
-# Instalar dependências
-npm install
-
-# Executar aplicação
-node index.js
-
-# Verificar versão do Node.js
-node --version
-
-# Verificar versão do npm
-npm --version
-```
+Comandos básicos para trabalhar com o projeto:
+- Instalar dependências: npm install
+- Executar aplicação: node index.js
+- Verificar versão do Node.js: node --version
+- Verificar versão do npm: npm --version
 
 ## 🔍 Conceitos Importantes
 
@@ -418,12 +288,13 @@ Os diagramas incluídos neste repositório servem como ferramentas pedagógicas 
 
 ### 📈 Visualização da Evolução
 
-O **[arquitetura.puml](arquitetura.puml)** mostra como os conceitos evoluem das aulas 1 a 4:
+O **[arquitetura.puml](arquitetura.puml)** mostra como os conceitos evoluem das aulas 1 a 5:
 
 - **Aula 1**: HTTP nativo (base fundamental)
 - **Aula 2**: Express.js (simplificação)
 - **Aula 3**: Parâmetros dinâmicos (interatividade)
 - **Aula 4**: MVC e templates (organização)
+- **Aula 5**: Aplicação prática (ToDoList)
 
 ### 🔄 Fluxo de Dados
 
@@ -443,27 +314,23 @@ O **[mvc-diagram.puml](Aula 4/mvc-diagram.puml)** demonstra:
 - Integração Express Router + EJS
 - Modularização de código
 
+### 📋 Aplicação ToDoList
+
+O **[todolist-diagram.puml](Aula 5/ToDoList/todolist-diagram.puml)** ilustra:
+
+- Estrutura da aplicação ToDoList
+- Fluxo de requisições e respostas
+- Renderização de templates EJS
+- Planejamento para futuras implementações
+- Interação cliente-servidor
+
 ### 🛠️ Como Usar os Diagramas
 
-1. **No VS Code**:
+1. **No VS Code**: Instale a extensão PlantUML, abra qualquer arquivo .puml e use Ctrl+Shift+P → "PlantUML: Preview Current Diagram"
 
-   ```bash
-   # Instale a extensão PlantUML
-   # Abra qualquer arquivo .puml
-   # Use Ctrl+Shift+P → "PlantUML: Preview Current Diagram"
-   ```
+2. **Online**: Copie o conteúdo do arquivo .puml, cole em [PlantUML Online](http://www.plantuml.com/plantuml/uml/) e visualize o diagrama gerado
 
-2. **Online**:
-
-   - Copie o conteúdo do arquivo .puml
-   - Cole em [PlantUML Online](http://www.plantuml.com/plantuml/uml/)
-   - Visualize o diagrama gerado
-
-3. **Linha de Comando**:
-   ```bash
-   # Instale PlantUML
-   java -jar plantuml.jar arquitetura.puml
-   ```
+3. **Linha de Comando**: Instale PlantUML e execute com java -jar plantuml.jar arquitetura.puml
 
 ### 📖 Valor Pedagógico
 
