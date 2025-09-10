@@ -2,7 +2,30 @@
 
 ## 📚 Sobre o Repositório
 
-Este repositório contém exemplos práticos e progressivos da disciplina **Programação para Internet II** do curso de Tecnologia em Análise e Desenvolvimento de Sistemas (TADS 2025.2). 
+Este repositório contém exemplos práticos e progressivos da disciplina **Programação para Internet II** do curso de Tecnologia em Análise e Desenvolvimento de Sistemas (TADS 2025.2).
+
+Cada pasta representa uma aula com conceitos específicos, construindo conhecimento de forma incremental desde servidores HTTP básicos até aplicações web completas com Express.js e templates EJS.
+
+## 🎯 Objetivos de Aprendizagem
+
+- Compreender os fundamentos de servidores HTTP em Node.js
+- Dominar o framework Express.js para desenvolvimento web
+- Implementar roteamento dinâmico e manipulação de parâmetros
+- Utilizar templates EJS para renderização de páginas dinâmicas
+- Organizar código com padrão MVC (Model-View-Controller)
+- Desenvolver aplicações web interativas com persistência de dados
+
+## 📁 Estrutura do Repositório
+
+````
+
+<File before editing>
+```markdown
+# Programação para Internet II — Exemplos Práticos (TADS 2025.2)
+
+## 📚 Sobre o Repositório
+
+Este repositório contém exemplos práticos e progressivos da disciplina **Programação para Internet II** do curso de Tecnologia em Análise e Desenvolvimento de Sistemas (TADS 2025.2).
 
 Cada pasta representa uma aula com conceitos específicos, construindo conhecimento de forma incremental desde servidores HTTP básicos até aplicações web completas com Express.js e templates EJS.
 
@@ -16,33 +39,35 @@ Cada pasta representa uma aula com conceitos específicos, construindo conhecime
 
 ## 📁 Estrutura do Repositório
 
-```
+````
+
 Programacao_para_internet_II_2025/
-├── Aula 1/                    # Servidor HTTP Nativo
-│   ├── index.js              # Servidor HTTP básico
-│   ├── teste.js              # Exemplo Hello World
-│   ├── package.json          # Configurações do projeto
-│   └── README.md             # Documentação detalhada
-├── Aula 2/                    # Introdução ao Express
-│   ├── index.js              # Aplicação Express básica
-│   ├── package.json          # Dependências (Express)
-│   └── README.md             # Guia do Express
-├── Aula 3/                    # Parâmetros e Query Strings
-│   ├── index.js              # Rotas dinâmicas
-│   ├── package.json          # Configurações Express
-│   ├── parametros-diagram.puml # Diagrama de fluxo de dados
-│   └── README.md             # Guia de parâmetros
-├── Aula 4/                    # Routers e Templates EJS
-│   ├── index.js              # Aplicação principal
-│   ├── controller.js         # Router modular
-│   ├── views/
-│   │   └── pagina.ejs        # Template HTML dinâmico
-│   ├── package.json          # Dependências (Express + EJS)
-│   ├── mvc-diagram.puml      # Diagrama arquitetura MVC
-│   └── README.md             # Guia MVC e Templates
-├── arquitetura.puml           # Diagrama geral da evolução
-└── README.md                  # Este arquivo (documentação principal)
-```
+├── Aula 1/ # Servidor HTTP Nativo
+│ ├── index.js # Servidor HTTP básico
+│ ├── teste.js # Exemplo Hello World
+│ ├── package.json # Configurações do projeto
+│ └── README.md # Documentação detalhada
+├── Aula 2/ # Introdução ao Express
+│ ├── index.js # Aplicação Express básica
+│ ├── package.json # Dependências (Express)
+│ └── README.md # Guia do Express
+├── Aula 3/ # Parâmetros e Query Strings
+│ ├── index.js # Rotas dinâmicas
+│ ├── package.json # Configurações Express
+│ ├── parametros-diagram.puml # Diagrama de fluxo de dados
+│ └── README.md # Guia de parâmetros
+├── Aula 4/ # Routers e Templates EJS
+│ ├── index.js # Aplicação principal
+│ ├── controller.js # Router modular
+│ ├── views/
+│ │ └── pagina.ejs # Template HTML dinâmico
+│ ├── package.json # Dependências (Express + EJS)
+│ ├── mvc-diagram.puml # Diagrama arquitetura MVC
+│ └── README.md # Guia MVC e Templates
+├── arquitetura.puml # Diagrama geral da evolução
+└── README.md # Este arquivo (documentação principal)
+
+````
 
 ## 📊 Diagramas Arquiteturais
 
@@ -87,9 +112,10 @@ servidor.listen(8080, (erro) => {
         console.log('Servidor rodando na porta 8080');
     }
 });
-```
+````
 
 ### 🔧 Como Executar
+
 ```bash
 cd "Aula 1"
 node index.js
@@ -101,43 +127,47 @@ node index.js
 ## 🌐 Aula 2: Introdução ao Express.js
 
 ### 📖 Conceitos Abordados
+
 - Framework Express.js
 - Roteamento básico com métodos HTTP
 - Middleware e manipuladores de rota
 - Simplificação do desenvolvimento web
 
 ### 📂 Arquivos
+
 - **`index.js`** - Aplicação Express com rotas básicas
 - **`package.json`** - Dependências incluindo Express
 - **`.gitignore`** - Configuração de arquivos ignorados
 
 ### 💡 Exemplo Prático
+
 ```javascript
 // Aplicação Express com múltiplas rotas
-const express = require('express');
+const express = require("express");
 const app = express();
 
 // Rota 1: /teste
-app.get('/teste', (req, res) => {
-    res.send("Olá Express!");
+app.get("/teste", (req, res) => {
+  res.send("Olá Express!");
 });
 
 // Rota 2: /rota2
-app.get('/rota2', (req, res) => {
-    res.send("Rota 2!");
+app.get("/rota2", (req, res) => {
+  res.send("Rota 2!");
 });
 
 // Inicialização do servidor
 app.listen(8080, (erro) => {
-    if (erro) {
-        console.log("Erro ao iniciar o servidor:", erro);
-    } else {
-        console.log("Servidor rodando na porta 8080");
-    }
+  if (erro) {
+    console.log("Erro ao iniciar o servidor:", erro);
+  } else {
+    console.log("Servidor rodando na porta 8080");
+  }
 });
 ```
 
 ### 🔧 Como Executar
+
 ```bash
 cd "Aula 2"
 npm install
@@ -150,47 +180,51 @@ node index.js
 ## 🔗 Aula 3: Parâmetros de Rota e Query Strings
 
 ### 📖 Conceitos Abordados
+
 - Parâmetros de rota dinâmicos (`:parametro`)
 - Query strings (`?campo=valor`)
 - Captura e manipulação de dados da URL
 - Roteamento condicional
 
 ### 📂 Arquivos
+
 - **`index.js`** - Rotas com parâmetros e query strings
 - **`package.json`** - Configurações do projeto Express
 - **`.gitignore`** - Arquivos ignorados
 
 ### 💡 Exemplo Prático
+
 ```javascript
 const express = require("express");
 const app = express();
 
 // Rota com query string opcional
 app.get("/", (req, res) => {
-    var busca = req.query["campo"];  // ?campo=valor
-    var saida = "Query: " + busca;
-    res.send(saida);
+  var busca = req.query["campo"]; // ?campo=valor
+  var saida = "Query: " + busca;
+  res.send(saida);
 });
 
 // Rota com parâmetro obrigatório
 app.get("/IFPI/:conteudo", (req, res) => {
-    var conteudo = req.params.conteudo;  // /IFPI/teste
-    var saida = "Parametro: " + conteudo;
-    res.send(saida);
+  var conteudo = req.params.conteudo; // /IFPI/teste
+  var saida = "Parametro: " + conteudo;
+  res.send(saida);
 });
 
 // Rota específica (deve vir antes da genérica)
 app.get("/IFPI/Floriano", (req, res) => {
-    res.send("IFPI Campus Floriano");
+  res.send("IFPI Campus Floriano");
 });
 
 // Rota sem parâmetro
-app.get('/IFPI', (req, res) => {
-    res.send("Você não passou nenhum termo de busca");
+app.get("/IFPI", (req, res) => {
+  res.send("Você não passou nenhum termo de busca");
 });
 ```
 
 ### 🔧 Como Executar
+
 ```bash
 cd "Aula 3"
 npm install
@@ -206,6 +240,7 @@ node index.js
 ## 🎨 Aula 4: Routers Separados e Templates EJS
 
 ### 📖 Conceitos Abordados
+
 - Express Router para modularização
 - Template engine EJS (Embedded JavaScript)
 - Renderização de páginas dinâmicas
@@ -213,6 +248,7 @@ node index.js
 - Passagem de dados para templates
 
 ### 📂 Arquivos
+
 - **`index.js`** - Aplicação principal com configuração EJS
 - **`controller.js`** - Router modular exportado
 - **`views/pagina.ejs`** - Template HTML dinâmico
@@ -222,6 +258,7 @@ node index.js
 ### 💡 Exemplo Prático
 
 **Aplicação Principal (index.js):**
+
 ```javascript
 const express = require("express");
 const app = express();
@@ -232,51 +269,57 @@ app.set("view engine", "ejs");
 
 // Rota com renderização de template
 app.get("/:texto", (req, res) => {
-    var texto = req.params.texto;
-    res.render("pagina", {  // Renderiza views/pagina.ejs
-        texto: texto        // Passa dados para o template
-    });
+  var texto = req.params.texto;
+  res.render("pagina", {
+    // Renderiza views/pagina.ejs
+    texto: texto, // Passa dados para o template
+  });
 });
 
 // Uso de routers modulares
-app.use("/user", controller);     // Rotas: /user/ e /user/rota2
+app.use("/user", controller); // Rotas: /user/ e /user/rota2
 app.use("/products", controller); // Rotas: /products/ e /products/rota2
 ```
 
 **Controller Modular (controller.js):**
+
 ```javascript
 const express = require("express");
 const router = express.Router();
 
 // Rota base do router
 router.get("/", (req, res) => {
-    res.send("Esta resposta vem do controller");
+  res.send("Esta resposta vem do controller");
 });
 
 // Rota adicional do router
 router.get("/rota2", (req, res) => {
-    res.send("Rota 2");
+  res.send("Rota 2");
 });
 
 module.exports = router;
 ```
 
 **Template EJS (views/pagina.ejs):**
+
 ```html
 <!DOCTYPE html>
 <html lang="pt_br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= texto %></title>  <!-- Dados dinâmicos -->
-</head>
-<body>
-    <h1><%= texto %></h1>        <!-- Renderização de variável -->
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= texto %></title>
+    <!-- Dados dinâmicos -->
+  </head>
+  <body>
+    <h1><%= texto %></h1>
+    <!-- Renderização de variável -->
+  </body>
 </html>
 ```
 
 ### 🔧 Como Executar
+
 ```bash
 cd "Aula 4"
 npm install
@@ -292,11 +335,13 @@ node index.js
 ## 🛠️ Pré-requisitos e Instalação
 
 ### Requisitos do Sistema
+
 - **Node.js** (versão 14 ou superior)
 - **npm** (gerenciador de pacotes)
 - Editor de código (VS Code recomendado)
 
 ### Instalação Geral
+
 ```bash
 # Clone o repositório
 git clone <url-do-repositorio>
@@ -328,16 +373,19 @@ npm --version
 ## 🔍 Conceitos Importantes
 
 ### HTTP Status Codes
+
 - **200** - OK (sucesso)
 - **404** - Not Found (não encontrado)
 - **500** - Internal Server Error (erro interno)
 
 ### Express.js Fundamentals
+
 - **Middleware** - Funções que executam durante o ciclo de requisição
 - **Routing** - Definição de endpoints da aplicação
 - **Template Engine** - Sistema de renderização de páginas dinâmicas
 
 ### EJS Syntax
+
 - **`<%= variavel %>`** - Renderiza valor (com escape HTML)
 - **`<%- variavel %>`** - Renderiza valor (sem escape HTML)
 - **`<% codigo %>`** - Executa código JavaScript
@@ -352,12 +400,14 @@ npm --version
 ## 📚 Recursos Adicionais
 
 ### Documentação Oficial
+
 - [Documentação oficial do Node.js](https://nodejs.org/docs/)
 - [Documentação do Express.js](https://expressjs.com/)
 - [Guia do EJS](https://ejs.co/)
 - [MDN Web Docs - HTTP](https://developer.mozilla.org/docs/Web/HTTP)
 
 ### Ferramentas para Diagramas
+
 - [PlantUML](https://plantuml.com/) - Ferramenta para criação de diagramas
 - [VS Code PlantUML Extension](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml) - Extensão para visualizar diagramas
 - [PlantUML Online Server](http://www.plantuml.com/plantuml/uml/) - Visualizador online
@@ -367,21 +417,27 @@ npm --version
 Os diagramas incluídos neste repositório servem como ferramentas pedagógicas para:
 
 ### 📈 Visualização da Evolução
+
 O **[arquitetura.puml](arquitetura.puml)** mostra como os conceitos evoluem das aulas 1 a 4:
+
 - **Aula 1**: HTTP nativo (base fundamental)
 - **Aula 2**: Express.js (simplificação)
 - **Aula 3**: Parâmetros dinâmicos (interatividade)
 - **Aula 4**: MVC e templates (organização)
 
 ### 🔄 Fluxo de Dados
+
 O **[parametros-diagram.puml](Aula 3/parametros-diagram.puml)** ilustra:
+
 - Como URLs são processadas
 - Diferença entre parâmetros e query strings
 - Ordem de precedência das rotas
 - Objetos `req.params` e `req.query`
 
 ### 🏗️ Arquitetura MVC
+
 O **[mvc-diagram.puml](Aula 4/mvc-diagram.puml)** demonstra:
+
 - Separação de responsabilidades
 - Fluxo Model-View-Controller
 - Integração Express Router + EJS
@@ -390,6 +446,7 @@ O **[mvc-diagram.puml](Aula 4/mvc-diagram.puml)** demonstra:
 ### 🛠️ Como Usar os Diagramas
 
 1. **No VS Code**:
+
    ```bash
    # Instale a extensão PlantUML
    # Abra qualquer arquivo .puml
@@ -397,6 +454,7 @@ O **[mvc-diagram.puml](Aula 4/mvc-diagram.puml)** demonstra:
    ```
 
 2. **Online**:
+
    - Copie o conteúdo do arquivo .puml
    - Cole em [PlantUML Online](http://www.plantuml.com/plantuml/uml/)
    - Visualize o diagrama gerado
@@ -410,6 +468,7 @@ O **[mvc-diagram.puml](Aula 4/mvc-diagram.puml)** demonstra:
 ### 📖 Valor Pedagógico
 
 Os diagramas ajudam a:
+
 - **Compreender** a arquitetura visualmente
 - **Comparar** diferentes abordagens
 - **Memorizar** fluxos de dados
@@ -424,4 +483,4 @@ Os diagramas ajudam a:
 
 ---
 
-*Cada pasta é independente e pode ser estudada separadamente. Use os exemplos para compreender a evolução dos conceitos e práticas de desenvolvimento web com Node.js e Express.js.*
+_Cada pasta é independente e pode ser estudada separadamente. Use os exemplos para compreender a evolução dos conceitos e práticas de desenvolvimento web com Node.js e Express.js._
