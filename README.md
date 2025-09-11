@@ -15,44 +15,6 @@ Cada pasta representa uma aula com conceitos específicos, construindo conhecime
 - Organizar código com padrão MVC (Model-View-Controller)
 - Desenvolver aplicações web interativas com persistência de dados
 
-## 📁 Estrutura do Repositório
-
-```
-Programacao_para_internet_II_2025/
-├── 📂 Aula 1 — Servidor HTTP Nativo
-│ ├── index.js # Servidor HTTP básico
-│ ├── teste.js # Exemplo "Hello World"
-│ ├── package.json # Configurações do projeto
-│ └── README.md # Documentação detalhada
-├── 📂 Aula 2 — Introdução ao Express
-│ ├── index.js # Aplicação Express básica
-│ ├── package.json # Dependências (Express)
-│ └── README.md # Guia do Express
-├── 📂 Aula 3 — Parâmetros e Query Strings
-│ ├── index.js # Rotas dinâmicas
-│ ├── package.json # Configurações Express
-│ ├── parametros-diagram.puml # Diagrama de fluxo de dados
-│ └── README.md # Guia de parâmetros
-├── 📂 Aula 4 — Routers e Templates EJS
-│ ├── index.js # Aplicação principal
-│ ├── controller.js # Router modular
-│ ├── views/
-│ │ └── pagina.ejs # Template HTML dinâmico
-│ ├── package.json # Dependências (Express + EJS)
-│ ├── mvc-diagram.puml # Diagrama da arquitetura MVC
-│ └── README.md # Guia MVC e Templates
-├── 📂 Aula 5 — Projeto para exercitar
-│ ├── 📂 ToDoList
-│ │ ├── app.js # Aplicação Express com EJS
-│ │ ├── views/
-│ │ │ └── index.ejs # Template da lista de tarefas
-│ │ ├── package.json # Dependências (Express + EJS)
-│ │ ├── todolist-diagram.puml # Diagrama da arquitetura
-│ │ └── README.md # Documentação do projeto
-├── 📄 arquitetura.puml # Diagrama geral da evolução
-└── 📄 README.md # Documentação principal
-```
-
 ## 🚀 Aula 1: Servidor HTTP Básico com Node.js
 
 ### 📖 Conceitos Abordados
@@ -207,16 +169,15 @@ Para executar, navegue até a pasta "Aula 5/ToDoList", instale as dependências 
 
 ### 🚀 Funcionalidades Implementadas
 
+- Persistencia em arquivo `.json`
 - Visualização de tarefas em formato de tabela
 - Estrutura para marcação de tarefas como concluídas
-- Interface para adição de novas tarefas
 
 ### 🔍 Próximos Passos
 
-- Implementar persistência de dados
+- Adicionar funcionalidade de adição de tarefa
 - Adicionar funcionalidade de exclusão de tarefas
 - Melhorar o design com CSS
-- Implementar filtros por status
 
 ---
 
@@ -266,7 +227,7 @@ Comandos básicos para trabalhar com o projeto:
 2. **Aula 2**: Adicione uma rota que retorne dados em formato JSON
 3. **Aula 3**: Crie uma rota que aceite múltiplos parâmetros
 4. **Aula 4**: Desenvolva um template mais complexo com CSS e JavaScript
-
+5. **Aula 5**: Adicione colunas(campos) como "prazo" ou "nível prioridade" para as tarefas
 ## 📚 Recursos Adicionais
 
 ### Documentação Oficial
