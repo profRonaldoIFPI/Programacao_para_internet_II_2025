@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,24 +7,27 @@
 </head>
 <body>
     <h1>ToDo task list</h1>
+    
     <table>
         <thead>
-            <th>Task</th> <!-- table header  -->
+            <th>Task</th>   <!-- table header  -->
             <th>Status</th>
             <th>Action</th>
         </thead>
         <tbody>
-            <tr>        <!-- table row  -->
-                <td>    <!-- table data  -->
-                    Estudar EJS
-                </td>
-                <td>
-                    pendente
-                </td>
-                <td>
-                    <a>Concluir</a>
-                </td>
-            </tr>
+            <% tasks.forEach(task => { %>
+                <tr>        <!-- table row  -->
+                    <td>    <!-- table data  -->
+                        <%= task.title %>
+                    </td>
+                    <td>
+                        <%= task.completed?"Completed":"Pending" %>
+                    </td>
+                    <td>
+                        <a href="/tasks/<%= task.id %>">Finish<%= task.id %></a>
+                    </td>
+                </tr>
+            <% }); %>
         </tbody>
     </table>
     <br>
