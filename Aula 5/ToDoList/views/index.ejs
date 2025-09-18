@@ -1,37 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToDo List</title>
-</head>
-<body>
-    <h1>ToDo list: tasks</h1>
-    
-    <table>
-        <thead>
-            <th>Task</th>   <!-- table header  -->
-            <th>Status</th>
-            <th>Action</th>
-        </thead>
-        <tbody>
-            <% tasks.forEach(task => { %>
-                <tr>        <!-- table row  -->
-                    <td>    <!-- table data  -->
-                        <%= task.title %>
-                    </td>
-                    <td>
-                        <%= task.completed?"Completed":"Pending" %>
-                    </td>
-                    <td>
-                        <a href="/tasks/<%= task.id %>">Finish</a>
-                        <a href="/delTasks/<%= task.id %>">Delete</a>
-                    </td>
-                </tr>
-            <% }); %>
-        </tbody>
-    </table>
-    <br>
-    <a href="/newTask">New task</a>
-</body>
-</html>
+<%- include("partials/head.ejs") %>
+
+
+    <div class="container is-max-widescreen">
+        <table class="table is-striped">
+            <thead>
+                <th>Task</th>   <!-- table header  -->
+                <th>Status</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <% tasks.forEach(task => { %>
+                    <tr>        <!-- table row  -->
+                        <td>    <!-- table data  -->
+                            <%= task.title %>
+                        </td>
+                        <td>
+                            <%= task.completed?"Completed":"Pending" %>
+                        </td>
+                        <td>
+                            <a 
+                            class="button is-success <%= task.completed ? 'is-hidden' : '' %>" href="/tasks/<%= task.id %>">
+                                Finish
+                            </a>
+                            <a 
+                            class="button is-danger <%= task.completed ? '' : 'is-hidden' %>" 
+                            href="/delTasks/<%= task.id %>">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+        <br>
+        <a class="button is-primary" href="/newTask">New task</a>
+    </div>
+
+<%- include("partials/footer.ejs") %>

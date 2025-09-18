@@ -6,6 +6,7 @@ const v4 = require('uuid').v4
 
 app.set("view engine", "ejs") //configura o motor de render
 app.use(express.urlencoded({extended: true})) //decondificador POST
+app.use(express.static("public")) //configura a pasta de arquivos estaticos
 
 const loadTask = ()=>{ //carrega o arquivo json e retorna o conteudo
     try{

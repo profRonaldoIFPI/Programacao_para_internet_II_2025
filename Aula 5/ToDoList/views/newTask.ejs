@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToDo List</title>
-</head>
-<body>
+<%- include("partials/head.ejs") %>
+
     <h1>ToDo list: new task</h1>
     <form action="/tasks" method="POST">
         <label placeholder="Name of task" for="title">
@@ -14,6 +8,6 @@
         <input type="text" name="title" id="title" required>
         <button type="submit">Add Task</button>
     </form> 
-    <a href="/tasks">Back to list</a>    
-</body>
-</html>
+    <a href="/tasks">Back to list</a>   
+     
+<%- include("partials/footer.ejs") %>

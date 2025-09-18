@@ -1,18 +1,8 @@
 [
     {
-        "id": 1,
-        "title": "Estudar EJS",
-        "completed": true
-    },
-    {
         "id": 3,
         "title": "Estudar JavaScript",
         "completed": true
-    },
-    {
-        "id": 1758061681754,
-        "title": "Estudar REACT + REST",
-        "completed": false
     },
     {
         "id": "747d49ec-fc68-4cef-b639-ccae86f2f096",
