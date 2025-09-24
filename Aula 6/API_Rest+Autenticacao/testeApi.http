@@ -1,0 +1,10 @@
+POST http://localhost:3000/cadastro
+Content-type: application/json
+
+{
+    "name": "Ronaldo",
+    "email": "ronaldo@ifpi.edu.br",
+    "password": "12345678",
+    "isAdmin": "true"
+}
+
