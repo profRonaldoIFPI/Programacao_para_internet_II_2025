@@ -1,17 +1,17 @@
 import express from "express";
-import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import User from "../model/User.js";
 
 const router = express.Router();
-
 router.post("/cadastro", async (req, res)=>{
     try{
-        await mongoose.connect("mongodb+srv://ronaldopb_db_user:em5UiHb7UbBb1u2q@servidoraulasppiii.e7oulzt.mongodb.net/?ServidorAulasPPIIIretryWrites=true&w=majority&appName=ServidorAulasPPIII");
-        console.log(req)
         const usuario = req.body
-        res.json(usuario)//gravar no MongoDB
+        const costFactor = 10; //2^10 = 1024 iterações
+        usuario.password = bcrypt.hashSync(usuario.password, costFactor);
+        await User.create(usuario); //C do CRUD
+        res.status(201).json({message: "Usuário cadastrado."})
     }catch(erro){
-
+        res.status(502).json({erro: `${erro}`})
     }
 })
-
 export default router; 
