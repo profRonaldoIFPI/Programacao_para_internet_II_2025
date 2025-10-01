@@ -71,7 +71,7 @@ Para executar este projeto, você precisa criar um arquivo `.env` na raiz do pro
 PORT=3000
 
 # String de conexão com MongoDB (No dashboad da sua conta no MongoDB selecione o cluter e clique no boão "conect" selecione drivers e copie a URI).
-# MONGODB_URI="mongodb+srv://<username>:<password>@..."
+MONGODB_URI="mongodb+srv://<username>:<password>@..."
 ```
 
 ## Como Executar
