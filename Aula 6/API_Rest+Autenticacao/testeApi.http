@@ -1,9 +1,24 @@
+### Cadastro
 POST http://localhost:3000/cadastro
-Content-type: application/json
+Content-Type: application/json
 
 {
-    "name": "Ronaldo",
-    "email": "ronaldo.borges@ifpi.edu.br",
-    "password": "12345678",
-    "isAdmin": "true"
+  "name": "Ronaldo",
+  "email": "ronaldo@ifpi.edu.br",
+  "password": "12345678",
+  "isAdmin": true
 }
+
+### Login
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "email": "ronaldo.borges@ifpi.edu.br",
+  "password": "12345678"
+}
+
+### 
+
+GET  http://localhost:3000/listarUsuarios
+Authorization: token
