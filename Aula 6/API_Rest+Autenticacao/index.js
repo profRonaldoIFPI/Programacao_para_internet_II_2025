@@ -3,6 +3,7 @@ import express from "express";
 import conectDB from "./db.js";
 import publicRoutes from "./routes/public.js";
 import privateRoutes from "./routes/private.js"
+import authenticate from './middleware/authenticate.js';
 
 const PORT = process.env.PORT;
 const app = express();

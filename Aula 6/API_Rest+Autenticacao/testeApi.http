@@ -18,7 +18,21 @@ Content-Type: application/json
   "password": "12345678"
 }
 
-### 
-
+### token correto
 GET  http://localhost:3000/listarUsuarios
-Authorization: token
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGRkYjliMWEzYzU1YjkwNGJmNTU4YzUiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NjEwODQxMjMsImV4cCI6MTc2MTA5MTMyM30._Hw7XdXOUPmVd-i4mcPmOyCru5xYTx0yGBY-qupnIGE
+
+### tipo errad de token 
+GET  http://localhost:3000/listarUsuarios
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGRkYjliMWEzYzU1YjkwNGJmNTU4YzUiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NjEwODQxMjMsImV4cCI6MTc2MTA5MTMyM30._Hw7XdXOUPmVd-i4mcPmOyCru5xYTx0yGBY-qupnIGE
+
+### token incorreto
+GET  http://localhost:3000/listarUsuarios
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGRkYjliMWEzYzU1YjkwNGJmNTU4YzUiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NjEwODQxMjMsImV4cCI6MTc2MTA5MXXXXXX._Hw7XdXOUPmVd-i4mcPmOyCru5xYTx0yGBY-qupnIGE
+
+### token sem o header authorization
+GET  http://localhost:3000/listarUsuarios
+
+### sem token 
+GET  http://localhost:3000/listarUsuarios
+Authorization: Bearer
