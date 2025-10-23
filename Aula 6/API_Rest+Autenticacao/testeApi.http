@@ -20,7 +20,7 @@ Content-Type: application/json
 
 ### token correto
 GET  http://localhost:3000/listarUsuarios
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGRkYjliMWEzYzU1YjkwNGJmNTU4YzUiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NjEwODQxMjMsImV4cCI6MTc2MTA5MTMyM30._Hw7XdXOUPmVd-i4mcPmOyCru5xYTx0yGBY-qupnIGE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGRkYjliMWEzYzU1YjkwNGJmNTU4YzUiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NjExNzgzNDgsImV4cCI6MTc2MTE4NTU0OH0.hwp07j3KPrhp8hRbIe_FWr79yeSU-_8UEQoeXoedwjE
 
 ### tipo errad de token 
 GET  http://localhost:3000/listarUsuarios
@@ -36,3 +36,18 @@ GET  http://localhost:3000/listarUsuarios
 ### sem token 
 GET  http://localhost:3000/listarUsuarios
 Authorization: Bearer
+
+### deletar usuário
+POST http://localhost:3000/deletarUsuario
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGRkYjliMWEzYzU1YjkwNGJmNTU4YzUiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NjExNzgzNDgsImV4cCI6MTc2MTE4NTU0OH0.hwp07j3KPrhp8hRbIe_FWr79yeSU-_8UEQoeXoedwjE
+
+Content-Type: application/json
+
+{
+  "isActive": true,
+  "_id": "68ddb9b1a3c55b904bf558c5",
+  "name": "Ronaldo",
+  "email": "ronaldo.borges@ifpi.edu.br",
+  "isAdmin": true,
+  "__v": 0
+}

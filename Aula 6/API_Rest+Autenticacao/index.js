@@ -9,8 +9,8 @@ const PORT = process.env.PORT;
 const app = express();
 app.use(express.json()); //necessário para receber json via API.
 
-app.use('/', publicRoutes);
-app.use('/', authenticate, privateRoutes);
+app.use('/', publicRoutes); // rotas sem senha
+app.use('/', authenticate, privateRoutes); // rotas com senha
 
 //esta função é assíncrona e vamos tratar a "Promisse"
 conectDB()
