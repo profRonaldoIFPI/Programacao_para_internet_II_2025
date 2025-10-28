@@ -62,16 +62,19 @@ export const updateUser = async (req, res) =>{
         res.status(400).json({message:  `Erro:( \n${erro}`})
     }
 }
-//DELETE /* DEVEMOS PERMITIR ISSO ? */
+//DELETE
 export const deleteUser = async (req, res) =>{
     try{
         const user = req.body
         console.log(user)
-        // user.isActive = false
+    /*
+        DELETAR REGISTRO! DEVEMOS PERMITIR ISSO? HÁ CONSEQUÊNCIAS?
+        await User.findByIdAndDelete(user._id, user)
+        res.status(200).json({message: "Usuário deletado com sucesso."})
+    */
+        user.isActive = false
         await User.findByIdAndUpdate(user._id, user)
-        // await User.findByIdAndDelete(user._id, user)
         res.status(200).json({message: "Usuário desativado com sucesso."})
-        // res.status(200).json({message: "Usuário atualizado com sucesso."})
     }catch(erro){
         res.status(400).json({message:  `Erro:( \n${erro}`})
     }

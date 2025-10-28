@@ -1,103 +1,75 @@
 # API REST com Autenticação
 
-Neste projeto estamos implementando uma API REST básica para gerenciamento de usuários com sistema de autenticação utilizando Node.js, Express, JWT (JSON Web Token) e MongoDB.
+Material didático construído em aula junto aos alunos para demonstrar, passo a passo, a criação de uma API REST com autenticação utilizando Node.js, Express e MongoDB.
 
-## Tecnologias Utilizadas
+## Tecnologias utilizadas
+- **Node.js** para execução do JavaScript no backend.
+- **Express.js** como framework de rotas e middlewares.
+- **MongoDB** como banco de dados não relacional.
+- **Mongoose** como ODM para modelar e validar documentos.
+- **bcrypt** para hash de senhas.
+- **jsonwebtoken (JWT)** para emissão e validação de tokens.
+- **dotenv** para carregamento das variáveis de ambiente.
 
-- **Node.js** - Runtime JavaScript
-- **Express.js** - Framework web para Node.js
-- **MongoDB** - Banco de dados NoSQL
-- **JWT** - Biblioteca para geração e verificação de tokens
-- **Mongoose** - ODM para MongoDB
-- **bcrypt** - Biblioteca para hash de senhas
-- **dotenv** - Gerenciamento de variáveis de ambiente
-
-## Estrutura do Projeto
-
+## Estrutura do projeto
 ```
-├── README.md
-├── db.js                 # Configuração da conexão com MongoDB
-├── index.js              # Arquivo principal da aplicação
+├── controllers/
+│   └── userController.js      # Regras de negócio e acesso ao modelo
+├── middleware/
+│   └── authenticate.js        # Validação do token JWT nas rotas privadas
 ├── model/
-│   └── User.js          # Modelo de dados do usuário
-├── package.json         # Dependências e scripts
+│   └── User.js                # Schema Mongoose para usuários
 ├── routes/
-│   └── public.js        # Rotas públicas da API
-└── testeApi.http        # Arquivo de testes da API
+│   ├── public.js              # Rotas abertas: cadastro e login
+│   └── private.js             # Rotas protegidas por autenticação
+├── db.js                      # Conexão com o MongoDB
+├── index.js                   # Ponto de entrada da aplicação Express
+├── testeApi.http              # Coleção de requisições para testar os endpoints da API
+└── .env                       # Variáveis de ambiente (não versionado)
 ```
 
-## Funcionalidades
+## Modelagem de usuário
+O schema `User` inclui os seguintes campos:
+- `name` (String, obrigatório): nome completo do usuário.
+- `email` (String, obrigatório e único): usado como credencial de login.
+- `password` (String, obrigatório): armazenada com hash gerado pelo `bcrypt`.
+- `isAdmin` (Boolean, padrão `false`): indica privilégios administrativos.
+- `isActive` (Boolean, padrão `true`): usado para "soft delete", preservando o histórico.
 
-### Modelo de Usuário
+## Fluxo de autenticação
+1. **Cadastro (`POST /cadastro`)**: cria um usuário com senha criptografada.
+2. **Login (`POST /login`)**: valida credenciais, gera token JWT com `userId` e `isAdmin`.
+3. **Rotas privadas**: exigem header `Authorization: Bearer <token>`. O middleware `authenticate` valida o token e libera acesso.
 
-O sistema trabalha com um modelo de usuário que contém:
+## Endpoints disponíveis
+### Rotas públicas (`routes/public.js`)
+- `POST /cadastro`: recebe `name`, `email`, `password` e opcionalmente `isAdmin`. Retorna mensagem de criação.
+- `POST /login`: recebe `email` e `password`. Retorna token JWT com validade de 2 horas.
 
-- **name**: Nome do usuário (obrigatório)
-- **email**: Email único do usuário (obrigatório)
-- **password**: Senha criptografada (obrigatório)
-- **isAdmin**: Flag para identificar administradores (padrão: false)
+### Rotas privadas (`routes/private.js`)
+- `GET /listarUsuarios`: devolve a lista de usuários (sem o campo `password`).
+- `POST /atualizarUsuario`: atualiza dados pelo `_id`. Pode ser usado para promover usuários ou reativá-los.
+- `POST /deletarUsuario`: faz soft delete (`isActive = false`) preservando o registro no banco.
 
-### Endpoints Disponíveis
+> Dica para as aulas: existe um TODO no controller incentivando os alunos a implementar uma busca de usuário por e-mail ou ID.
 
-#### POST /cadastro
-
-Endpoint para cadastro de novos usuários.
-
-**Corpo da requisição:**
-
-```json
-{
-  "name": "Nome do Usuário",
-  "email": "usuario@email.com",
-  "password": "senha123",
-  "isAdmin": false
-}
-```
-
-**Resposta de sucesso (201):**
-
-```json
-{
-  "message": "Usuário cadastrado."
-}
-```
-
-## Configuração do Ambiente
-
-Para executar este projeto, você precisa criar um arquivo `.env` na raiz do projeto com as seguintes variáveis:
-
+## Variáveis de ambiente
+Crie um arquivo `.env` na raiz do projeto com, no mínimo, as seguintes chaves:
 ```env
-# Porta do servidor
 PORT=3000
-
-# String de conexão com MongoDB (No dashboad da sua conta no MongoDB selecione o cluter e clique no boão "conect" selecione drivers e copie a URI).
-MONGODB_URI="mongodb+srv://<username>:<password>@..."
+MONGODB_URI="mongodb+srv://<usuario>:<senha>@<cluster>/<nome_do_banco>?retryWrites=true&w=majority"
+SECRET_JWT="chave-secreta-para-assinar-o-token"
 ```
+> Nunca compartilhe valores reais de acesso ao banco ou segredos de produção em repositórios públicos.
 
-## Como Executar
+## Como executar
+1. Instale as dependências: `npm install`
+2. Configure o `.env`
+3. Inicialize o servidor: `npm run dev`
+4. A API ficará disponível em `http://localhost:3000/`
 
-1. Clone o repositório
-2. Instale as dependências:
-   ```bash
-   npm install
-   ```
-3. Configure o arquivo `.env` conforme mostrado acima
-4. Execute o servidor em modo de desenvolvimento:
-   ```bash
-   npm run dev
-   ```
-5. O servidor estará disponível em `http://localhost:3000`
-
-## Segurança
-
-- As senhas são criptografadas usando bcrypt com fator de custo 10 (1024 iterações)
-- O sistema utiliza validação de dados através do Mongoose
-- Emails são únicos no sistema
-
-## Testes
-
-O arquivo `testeApi.http` contém exemplos de requisições que podem ser executadas usando extensões como REST Client no VS Code.
+## Testes em aula
+O arquivo `testeApi.http` contém exemplos de requisições (cadastro, login, rotas com token). Utilize a extensão **REST Client** no VS Code ou ferramentas como **Insomnia** e **Postman** para praticar.
 
 ## Autor
-
-Ronaldo Borges - Professor IFPI
+Projeto guiado pelo professor **Ronaldo Borges (IFPI)** e desenvolvido colaborativamente com os alunos durante as aulas de Programação para Internet II.
