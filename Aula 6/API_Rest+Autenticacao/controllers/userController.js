@@ -62,6 +62,11 @@ export const updateUser = async (req, res) =>{
         res.status(400).json({message:  `Erro:( \n${erro}`})
     }
 }
+/*
+  CRIE UMA ROTA PARA PROMOVER UM USUÁRIO
+  Mude a chave isAdmin para true
+*/
+
 //DELETE
 export const deleteUser = async (req, res) =>{
     try{

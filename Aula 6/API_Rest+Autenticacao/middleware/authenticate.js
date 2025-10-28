@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-const authenticate = (req, res, next)=>{
+export const authenticate = (req, res, next)=>{
     const header = req.headers.authorization;
     if(!header){
         return res.status(400).json({message: "Faça o login."})
@@ -17,4 +17,10 @@ const authenticate = (req, res, next)=>{
         return res.status(400).json({message: "Token inválido ou vencido. Faça login novamente."})
     }
 }
-export default authenticate; 
+export const authorizaAdmin = (req, res, next)=>{
+    const user = req.body
+    if(!user.isAdmin){
+        return res.status(400).json({message: "Acesso negado. Somente usuários Administradores."})
+    }
+    next(); 
+}
