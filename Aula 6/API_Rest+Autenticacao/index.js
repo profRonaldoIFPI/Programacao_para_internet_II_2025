@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import express from "express";
-import conectDB from "./db.js";
+import conectDB from "./database/db.js";
 import publicRoutes from "./routes/public.js";
 import privateRoutes from "./routes/private.js"
 import { authenticate, authorizaAdmin } from './middleware/authenticate.js';
@@ -24,6 +24,6 @@ conectDB()
         }) 
     })
     .catch((erro)=>{
-        console.log(`Erro de conexão com o MongoDB: ${erro}`);
+        console.log(`Erro de conexão com o database: ${erro}`);
     })
 

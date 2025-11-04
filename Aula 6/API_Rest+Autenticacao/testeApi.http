@@ -4,9 +4,8 @@ Content-Type: application/json
 
 {
   "name": "Ronaldo",
-  "email": "ronaldo@ifpi.edu.br",
-  "password": "12345678",
-  "isAdmin": true
+  "email": "ronaldo.pb@ifpi.edu.br",
+  "password": "12345678"
 }
 
 ### Login
@@ -14,13 +13,13 @@ POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-  "email": "ronaldo.borges@ifpi.edu.br",
+  "email": "ronaldo.pb@ifpi.edu.br",
   "password": "12345678"
 }
 
 ### token correto
 GET  http://localhost:3000/listarUsuarios
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGRkYjliMWEzYzU1YjkwNGJmNTU4YzUiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3NjExNzgzNDgsImV4cCI6MTc2MTE4NTU0OH0.hwp07j3KPrhp8hRbIe_FWr79yeSU-_8UEQoeXoedwjE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzYxNzg0MzQ3LCJleHAiOjE3NjE3OTE1NDd9.tL6jSam4y31IHAN-Vw2XOQG-f4Wq4s3K0XRo9fk8F6c
 
 ### tipo errad de token 
 GET  http://localhost:3000/listarUsuarios

@@ -20,7 +20,10 @@ export const newUser = async (req, res) => {
 //READ 
 export const listUsers = async (req, res) =>{
     try{
-        const users = await User.find().select("-password"); //remove a chave password
+        
+        const users = await User.findAll({
+            attributes: {exclude: "password"},
+        })
         if(!users){
             return res.status(404).json({message: "Não há registros."})
         }
@@ -32,7 +35,7 @@ export const listUsers = async (req, res) =>{
 export const validateUser = async (req, res)=>{
     const usuario = req.body
     try{
-        const user = await User.findOne({email: usuario.email});
+        const user = await User.findOne({ where: {email: usuario.email}})
         if(!user){
             return res.status(401).json({message: "Usuário não cadastrado."})
         }
@@ -56,16 +59,22 @@ export const validateUser = async (req, res)=>{
 export const updateUser = async (req, res) =>{
     try{
         const user = req.body
-        await User.findByIdAndUpdate(user._id, user)
+        await User.update(user, {where: {id: user._id}})
         res.status(200).json({message: "Usuário atualizado com sucesso."})
     }catch(erro){
         res.status(400).json({message:  `Erro:( \n${erro}`})
     }
 }
-/*
-  CRIE UMA ROTA PARA PROMOVER UM USUÁRIO
-  Mude a chave isAdmin para true
-*/
+export const elevateUser = async (req, res) =>{
+    try{
+        let user = req.body
+        user.isActive = true
+        await User.update(user, {where: {id: user._id}})
+        res.status(200).json({message: "Usuário promovido com sucesso."})
+    }catch(erro){
+        res.status(400).json({message:  `Erro:( \n${erro}`})
+    }
+}
 
 //DELETE
 export const deleteUser = async (req, res) =>{
@@ -74,11 +83,11 @@ export const deleteUser = async (req, res) =>{
         console.log(user)
     /*
         DELETAR REGISTRO! DEVEMOS PERMITIR ISSO? HÁ CONSEQUÊNCIAS?
-        await User.findByIdAndDelete(user._id, user)
+        await User.destroy(user, {where: {id: user._id}})
         res.status(200).json({message: "Usuário deletado com sucesso."})
     */
         user.isActive = false
-        await User.findByIdAndUpdate(user._id, user)
+        await User.update(user, {where: {id: user._id}})
         res.status(200).json({message: "Usuário desativado com sucesso."})
     }catch(erro){
         res.status(400).json({message:  `Erro:( \n${erro}`})

@@ -1,14 +1,16 @@
 //definição dos dados
-import mongoose from "mongoose";
+import { DataTypes } from "sequelize";
+import conectDB from "../database/db.js";
 
-const userSchema = new mongoose.Schema({
-    name:       {type: String, required: true },
-    email:      {type: String, required: true, unique: true},
-    password:   {type: String, required: true},
-    isAdmin:    {type: Boolean, default: false},
-    isActive:    {type: Boolean, default: true}
-});
+const sequelize = await conectDB()
+const User = sequelize.define("Users",{
+    name:       {type: DataTypes.STRING, allowNull: false,},
+    email:      {type: DataTypes.STRING, allowNull: false, unique: true,},
+    password:   {type: DataTypes.STRING, allowNull: false,},
+    isAdmin:    {type: DataTypes.BOOLEAN, defaultValue: false,},
+    isActive:   {type: DataTypes.BOOLEAN, defaultValue: true,},
+})
 
-const User = mongoose.model("User", userSchema, "users");
-//Parametros: nome do modelo, esquema, nome da coleção no MongoDB
+await User.sync();
+
 export default User;
