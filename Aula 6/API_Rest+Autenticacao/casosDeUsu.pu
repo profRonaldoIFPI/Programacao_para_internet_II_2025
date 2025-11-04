@@ -1,0 +1,46 @@
+@startuml ControleDeAcervoCasosDeUso
+left to right direction
+
+actor Visitante as "Visitante"
+actor Usuario as "Usuario autenticado"
+actor Admin as "Administrador"
+
+rectangle "API Controle de Acervo" as Sistema {
+  usecase UC01 as "Registrar usuario"
+  usecase UC02 as "Autenticar e gerar token"
+  usecase UC03 as "Consultar status do servidor"
+  usecase UC04 as "Consultar perfil"
+  usecase UC05 as "Gerenciar colecoes"
+  usecase UC06 as "Compartilhar colecao"
+  usecase UC07 as "Gerenciar objetos"
+  usecase UC08 as "Gerenciar emprestimos"
+  usecase UC09 as "Gerenciar pessoas"
+  usecase UC10 as "Gerenciar usuarios do sistema"
+  usecase UC11 as "Consultar colecoes globais"
+  usecase UC12 as "Consultar logs e auditorias"
+}
+
+Visitante --> UC01
+Visitante --> UC02
+Visitante --> UC03
+
+Usuario --> UC04
+Usuario --> UC05
+Usuario --> UC06
+Usuario --> UC07
+Usuario --> UC08
+Usuario --> UC09
+
+Admin --> UC04
+Admin --> UC05
+Admin --> UC06
+Admin --> UC07
+Admin --> UC08
+Admin --> UC09
+Admin --> UC10
+Admin --> UC11
+Admin --> UC12
+
+UC05 .> UC06 : <>
+UC08 .> UC09 : <>
+@enduml
