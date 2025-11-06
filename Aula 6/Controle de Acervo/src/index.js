@@ -1,0 +1,29 @@
+import 'dotenv/config';
+import express from "express";
+import conectDB from "./database/db.js";
+import publicRoutes from "../routes/public.js";
+import privateRoutes from "../routes/private.js"
+import { authenticate, authorizaAdmin } from './middleware/authenticate.js';
+
+const PORT = process.env.PORT;
+const app = express();
+app.use(express.json()); //necessário para receber json via API.
+
+app.use('/', publicRoutes); // rotas sem senha
+app.use('/', authenticate, privateRoutes); // rotas com senha
+
+//esta função é assíncrona e vamos tratar a "Promisse"
+conectDB()
+    .then(()=>{ //se conectDB funcionar...
+        app.listen(PORT,(erro)=>{
+            if(!erro){
+                console.log(`Servidor online. http://localhost:${PORT}/`)
+            }else{
+                console.log(`Não foi possível executar: ${erro}`)
+            }
+        }) 
+    })
+    .catch((erro)=>{
+        console.log(`Erro de conexão com o database: ${erro}`);
+    })
+
