@@ -1,0 +1,160 @@
+### Cadastro
+POST http://localhost:3000/cadastro
+Content-Type: application/json
+
+{
+  "name": "Ronaldo",
+  "email": "ronaldo.borges@ifpi.edu.br",
+  "password": "12345678",
+  "isAdmin": true
+}
+
+### Login
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "email": "ronaldo.borges@ifpi.edu.br",
+  "password": "12345678"
+}
+
+### Definição do token para os próximos testes
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlzQWRtaW4iOnRydWUsImlhdCI6MTc2Mjg4OTg4MiwiZXhwIjoxNzYyODk3MDgyfQ.fIvuEGXWXi-YjNALeGLtkYFoQL0PNXpRm92DRzwaTSs
+
+### token correto
+GET  http://localhost:3000/listarUsuarios
+Authorization: Bearer {{token}}
+
+### tipo errado de token 
+GET  http://localhost:3000/listarUsuarios
+Authorization: Basic {{token}}
+
+### token incorreto
+GET  http://localhost:3000/listarUsuarios
+Authorization: Bearer xxxhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlzQWRtaW4iOnRydWUsImlhdCI6MTc2MjM2NzI1OSwiZXhwIjoxNzYyMzc0NDU5fQ.aP_kgoxG6KQtnhpE9OJFac9jGW5_vrXZabNPeBCJ37o
+
+### token sem o header authorization
+GET  http://localhost:3000/listarUsuarios
+
+### sem token 
+GET  http://localhost:3000/listarUsuarios
+Authorization: Bearer 
+
+### deletar usuário
+POST http://localhost:3000/deletarUsuario
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Ronaldo",
+  "email": "ronaldo.pb@ifpi.edu.br",
+  "isAdmin": false,
+  "isActive": true,
+  "createdAt": "2025-11-05T18:13:09.607Z",
+  "updatedAt": "2025-11-05T18:13:09.607Z"
+}
+### Cadastro - novo usuário comum
+POST http://localhost:3000/cadastro
+Content-Type: application/json
+
+{
+  "name": "Alice",
+  "email": "alice@example.com",
+  "password": "12345678",
+  "isAdmin": false
+}
+
+### Cadastro - email duplicado (erro esperado)
+POST http://localhost:3000/cadastro
+Content-Type: application/json
+
+{
+  "name": "Alice Clone",
+  "email": "alice@example.com",
+  "password": "12345678",
+  "isAdmin": false
+}
+
+### Login - sucesso (Alice)
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "email": "alice@example.com",
+  "password": "12345678"
+}
+
+### Login - senha incorreta (erro esperado)
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "email": "alice@example.com",
+  "password": "senha_errada"
+}
+
+### Listar usuários - token correto
+GET  http://localhost:3000/listarUsuarios
+Authorization: Bearer {{token}}
+
+### Listar usuários - tipo errado de token
+GET  http://localhost:3000/listarUsuarios
+Authorization: Basic {{token}}
+
+### Listar usuários - token incorreto
+GET  http://localhost:3000/listarUsuarios
+Authorization: Bearer xxxhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlzQWRtaW4iOnRydWUsImlhdCI6MTc2MjM2NzI1OSwiZXhwIjoxNzYyMzc0NDU5fQ.aP_kgoxG6KQtnhpE9OJFac9jGW5_vrXZabNPeBCJ37o
+
+### Listar usuários - sem header Authorization
+GET  http://localhost:3000/listarUsuarios
+
+### Listar usuários - sem token 
+GET  http://localhost:3000/listarUsuarios
+Authorization: Bearer 
+
+### Atualizar usuário (requer autenticação, não necessariamente admin)
+POST http://localhost:3000/atualizarUsuario
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Ronaldo Atualizado",
+  "email": "ronaldo.atualizado@ifpi.edu.br"
+}
+
+### Atualizar usuário - sem token (erro esperado)
+POST http://localhost:3000/atualizarUsuario
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Tentativa sem token"
+}
+
+### Promover usuário (admin)
+POST http://localhost:3000/promoverUsuario
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "id": 2
+}
+
+### Promover usuário - sem admin (erro esperado)
+POST http://localhost:3000/promoverUsuario
+Authorization: Bearer {{tokenNaoAdmin}}
+Content-Type: application/json
+
+{
+  "id": 2
+}
+### deletar usuário
+POST http://localhost:3000/deletarUsuario
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "id": 1
+}

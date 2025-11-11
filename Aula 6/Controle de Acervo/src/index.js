@@ -1,16 +1,14 @@
 import 'dotenv/config';
 import express from "express";
 import conectDB from "./database/db.js";
-import publicRoutes from "../routes/public.js";
-import privateRoutes from "../routes/private.js"
+import userRouter from './modules/User/user.routes.js';
 import { authenticate, authorizaAdmin } from './middleware/authenticate.js';
 
 const PORT = process.env.PORT;
 const app = express();
 app.use(express.json()); //necessário para receber json via API.
 
-app.use('/', publicRoutes); // rotas sem senha
-app.use('/', authenticate, privateRoutes); // rotas com senha
+app.use('/user', userRouter); // todas as rotas de usuario
 
 //esta função é assíncrona e vamos tratar a "Promisse"
 conectDB()
