@@ -12,7 +12,7 @@ export const findUserById = async (userId) =>{
     return User.findOne({ where: {id: userId}})
 }
 export const findUserByEmail = async (email) =>{
-    return User.findOne({ where: {email: usuario.email}})
+    return User.findOne({ where: {email: email}})
 }
 export const updateUser = async (user) =>{
     return User.update(user, {where: {id: user.id}})
