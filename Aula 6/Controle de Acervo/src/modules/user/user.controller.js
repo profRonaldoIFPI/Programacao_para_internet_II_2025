@@ -1,11 +1,10 @@
 //CRUD de User
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import User from "./User.js";
 import {createUser, 
     findAllUsers, 
     findUserByEmail,
-    updateUser,
+    update,
     findUserById} from "./user.services.js"
 
 const secret = process.env.SECRET_JWT
@@ -58,7 +57,7 @@ export const validateUser = async (req, res)=>{
 export const updateUser = async (req, res) =>{
     try{
         const user = req.body
-        await User.updateUser(user)
+        await update(user)
         res.status(200).json({message: "Usuário atualizado com sucesso."})
     }catch(erro){
         res.status(400).json({message:  `Erro:( \n${erro}`})
@@ -68,7 +67,7 @@ export const elevateUser = async (req, res) =>{
     try{
         let user = req.body
         user.isActive = true
-        await User.updateUser(user)
+        await update(user)
         res.status(200).json({message: "Usuário promovido com sucesso."})
     }catch(erro){
         res.status(400).json({message:  `Erro:( \n${erro}`})
@@ -86,7 +85,7 @@ export const deleteUser = async (req, res) =>{
         res.status(200).json({message: "Usuário deletado com sucesso."})
     */
         user.isActive = false
-        await User.updateUser(user)
+        await update(user)
         res.status(200).json({message: "Usuário desativado com sucesso."})
     }catch(erro){
         res.status(400).json({message:  `Erro:( \n${erro}`})

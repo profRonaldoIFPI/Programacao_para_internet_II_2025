@@ -1,6 +1,6 @@
 //definição dos dados
 import { DataTypes } from "sequelize";
-import conectDB from "../database/db.js";
+import conectDB from "../../database/db.js";
 
 const sequelize = await conectDB()
 const User = sequelize.define("Users",{
