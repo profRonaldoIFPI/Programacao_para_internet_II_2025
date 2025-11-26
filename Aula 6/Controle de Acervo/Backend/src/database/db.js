@@ -10,8 +10,7 @@ const connectDB = async () => {
       return sequelize;
     }
 
-    const envPath = process.env.SQLITE_PATH || "./src/database/database.sqlite";
-    const storagePath = path.resolve(envPath);
+    const storagePath = path.resolve(process.env.SQLITE_PATH || "./src/database/database.sqlite");
     const dir = path.dirname(storagePath);
 
     if (!fs.existsSync(dir)) {
@@ -33,5 +32,4 @@ const connectDB = async () => {
   }
 };
 
-export { connectDB };
 export default connectDB;
