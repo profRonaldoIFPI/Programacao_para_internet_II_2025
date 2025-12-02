@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "name": "Ronaldo",
-  "email": "ronaldo.borges.teste@ifpi.edu.br",
+  "email": "ronaldo.borges@ifpi.edu.br",
   "password": "12345678",
   "isAdmin": true
 }
